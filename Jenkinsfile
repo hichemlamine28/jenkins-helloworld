@@ -24,23 +24,20 @@ node('master'){
    
  
                timeout(time: 30, unit: 'SECONDS') {
-  
-               def IMAGE_TAG = input message: 'Please select a Version', ok: 'Next',
-               parameters: [choice(name: 'IMAGE_TAG', choices: 'Dev\nQualif\nPreprod\nProd')]
- 
-                }
-        
-         echo "Selected Version = ${env.SELECTED_IMAGE_TAG}"
-    
-        echo "Environnement : ${params.IMAGE_TAG}"   // cette variable permet de choisir sur quel serveur on va deployer 
-
                
+               
+               
+    def userInput = input(id: 'userInput', message: 'some message', parameters: [
+    [$class: 'ChoiceParameterDefinition', choices: 'Dev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
+    ])
+    variable = userInput
+     echo variable          
+                }
+            
   }
  
-        echo "Environnement : ${params.IMAGE_TAG}"   // cette variable permet de choisir sur quel serveur on va deployer 
-        env="${params.IMAGE_TAG}"
-
-   
+        echo "Environnement : ${variable}"   // cette variable permet de choisir sur quel serveur on va deployer 
+       
    }
    
 
