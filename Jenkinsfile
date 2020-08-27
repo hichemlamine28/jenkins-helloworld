@@ -21,10 +21,6 @@ pipeline {
   agent any
   stages {
 
-
-
-node('master'){
-
     stage('set environment'){
    
  
@@ -46,11 +42,7 @@ node('master'){
                
   }
  
-        echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer 
-        env="${params.procedure}"
 
-   
-   }
    
 
 
