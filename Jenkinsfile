@@ -28,10 +28,9 @@ node('master'){
                
                
     def userInput = input(id: 'userInput', message: 'some message', parameters: [
-    [$class: 'ChoiceParameterDefinition', choices: 'Dev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
+    [$class: 'ChoiceParameterDefinition', choices: '\nDev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
     ])
-    variable = userInput
-     echo variable          
+    variable = userInput     
                 }
             
   }
@@ -45,12 +44,15 @@ node('master'){
 node {
     stage('clone') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-    }
+        echo "Environnement clone: ${variable}"  
+    }clone
     stage('build') {
     sh label: '', script: 'javac Main.java'
+        echo "Environnement build : ${variable}"  
     }
     stage('run') {
     sh label: '', script: 'java Main'
+        echo "Environnement run: ${variable}"  
     }
 }
 
