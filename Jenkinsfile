@@ -29,7 +29,7 @@ node('master'){
                parameters: [choice(name: 'IMAGE_TAG', choices: '\nDev\nQualif\nPreprod\nProd')]
  
                 }
-       IMAGE_TAG()
+        
          echo "Selected Version = ${env.SELECTED_IMAGE_TAG}"
     
         echo "Environnement : ${params.IMAGE_TAG}"   // cette variable permet de choisir sur quel serveur on va deployer 
