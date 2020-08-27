@@ -22,8 +22,6 @@ node('master'){
    
                timeout(time: 30, unit: 'SECONDS') {
            
-
-                    PROCEDURE = userInput
                    
                    parameters{
                     choice(name: 'choix',
