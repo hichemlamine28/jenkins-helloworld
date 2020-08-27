@@ -22,16 +22,21 @@ node('master'){
    
                timeout(time: 30, unit: 'SECONDS') {
            
-                    def userInput = input(
-                            id: 'userInput', message: 'Environnement?', ok: 'Submit', parameters: [
-                            [$class: 'ChoiceParameterDefinition', name: 'procedure', description: 'procedure', choices: '\nDev\nQualif\nPreprod\nProd'],
-                    ]
-                    )
+
                     PROCEDURE = userInput
+                   
+                   parameters{
+                    choice(name: 'choix',
+                           choices: '\nDev\nQualif\nPreprod\nProd',
+                           description: 'Environnement: ?'
+                       
+                   }
+                   
+                   
               
     
-        echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer
-        env="${params.procedure}"
+        echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer
+        env="${params.choix}"
         
                
   }  
