@@ -28,7 +28,7 @@ node('master'){
                    parameters{
                     choice(name: 'choix',
                            choices: '\nDev\nQualif\nPreprod\nProd',
-                           description: 'Environnement: ?'
+                           description: 'Environnement: ?')
                        
                    }
                    
