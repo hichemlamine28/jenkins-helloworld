@@ -26,7 +26,7 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
   
                def IMAGE_TAG = input message: 'Please select a Version', ok: 'Next',
-               parameters: [choice(name: 'IMAGE_TAG', choices: '\nDev\nQualif\nPreprod\nProd')]
+               parameters: [choice(name: 'IMAGE_TAG', choices: 'Dev\nQualif\nPreprod\nProd')]
  
                 }
         
