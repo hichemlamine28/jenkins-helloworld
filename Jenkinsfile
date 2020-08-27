@@ -31,31 +31,20 @@ node('master'){
             }
             echo "${env.choix}"
         }
-
-       
-                   
+ 
                 }
     
         echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer 
 
                
   }
-        
-        
-        
-        
-        
-        
+ 
         echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer 
         env="${params.procedure}"
 
    
    }
    
-   }
-
-
-
 
 
 node {
