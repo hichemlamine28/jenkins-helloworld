@@ -20,27 +20,38 @@ node('master'){
 
     stage('set environment'){
    
+ 
                timeout(time: 30, unit: 'SECONDS') {
-           
-                   
-                   parameters{
-                    choice(name: 'choix',
-                           choices: '\nDev\nQualif\nPreprod\nProd',
-                           description: 'Environnement: ?')
-                       
-                   }
-                   
-                   
-              
+                try {
+                    def userInput = input(
+                            id: 'userInput', message: 'Environnement?', ok: 'Submit', parameters: [
+                            [$class: 'ChoiceParameterDefinition', name: 'procedure', description: '', choices: '\nDev\nQualif\nPreprod\nUat\nProd'],
+                    ]
+                    )
+                    PROCEDURE = userInput
+                    echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deploy
+                } catch (err) {
+                    def user = err.getCauses()[0].getUser()
+                    if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
+                        echo "error catch"     // Set default Environment to 'dev'
+                    } else {
+                        didInput = false
+                        echo "aucun choix"
+                    }
+                }
     
-        echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer
-        env="${params.choix}"
-        
-               
-  }  
-        echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer
-        env="${params.choix}"
+        echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer 
 
+               
+  }
+        
+        
+        
+        
+        
+        
+        echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer 
+        env="${params.procedure}"
 
    
    }
