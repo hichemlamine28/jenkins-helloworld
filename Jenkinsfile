@@ -16,6 +16,13 @@ println "BRANCH : " + env.BRANCH_NAME
         ]
     )
 
+
+pipeline {
+  agent any
+  stages {
+
+
+
 node('master'){
 
     stage('set environment'){
@@ -57,4 +64,10 @@ node {
     stage('run') {
     sh label: '', script: 'java Main'
     }
+}
+
+
+
+
+}
 }
