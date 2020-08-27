@@ -22,25 +22,21 @@ node('master'){
    
  
                timeout(time: 30, unit: 'SECONDS') {
-                try {
-                    def userInput = input(
-                            id: 'userInput', message: 'Environnement?', ok: 'Submit', parameters: [
-                            [$class: 'ChoiceParameterDefinition', name: 'procedure', description: '', choices: '\nDev\nQualif\nPreprod\nUat\nProd'],
-                    ]
-                    )
-                    PROCEDURE = userInput
-                    echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deploy
-                } catch (err) {
-                    def user = err.getCauses()[0].getUser()
-                    if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
-                        echo "error catch"     // Set default Environment to 'dev'
-                    } else {
-                        didInput = false
-                        echo "aucun choix"
-                    }
+  
+        steps {
+            script {
+                env.choix = input message: 'Environnement ?', ok: 'Valider!',
+                        parameters: [choice(name: 'choix', choices: 'qualif\ntest\ndev\npreprod\nprod', 
+                                     description: 'Environnement?')]
+            }
+            echo "${env.choix}"
+        }
+
+       
+                   
                 }
     
-        echo "Environnement : ${params.procedure}"   // cette variable permet de choisir sur quel serveur on va deployer 
+        echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer 
 
                
   }
