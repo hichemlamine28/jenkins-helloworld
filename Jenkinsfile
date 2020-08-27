@@ -17,32 +17,31 @@ println "BRANCH : " + env.BRANCH_NAME
     )
 
 
-pipeline {
-  agent any
-  stages {
+
+node('master'){
 
     stage('set environment'){
    
  
                timeout(time: 30, unit: 'SECONDS') {
   
-        steps {
-            script {
-                env.choix = input message: 'Environnement ?', ok: 'Valider!',
-                        parameters: [choice(name: 'choix', choices: 'qualif\ntest\ndev\npreprod\nprod', 
-                                     description: 'Environnement?')]
-            }
-            echo "${env.choix}"
-        }
+               def IMAGE_TAG = input message: 'Please select a Version', ok: 'Next',
+               parameters: [choice(name: 'IMAGE_TAG', choices: '\nDev\nQualif\nPreprod\nProd')]
  
                 }
+       IMAGE_TAG()
+         echo "Selected Version = ${env.SELECTED_IMAGE_TAG}"
     
-        echo "Environnement : ${params.choix}"   // cette variable permet de choisir sur quel serveur on va deployer 
+        echo "Environnement : ${params.IMAGE_TAG}"   // cette variable permet de choisir sur quel serveur on va deployer 
 
                
   }
  
+        echo "Environnement : ${params.IMAGE_TAG}"   // cette variable permet de choisir sur quel serveur on va deployer 
+        env="${params.IMAGE_TAG}"
 
+   
+   }
    
 
 
@@ -58,8 +57,3 @@ node {
     }
 }
 
-
-
-
-}
-}
