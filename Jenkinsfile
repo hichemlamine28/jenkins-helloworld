@@ -27,9 +27,9 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
            
      try{          
-    def userInput = input(id: 'choix1', message: 'JOB ?', parameters: [
+    def userInput = input(id: 'choix', message: 'JOB / Environnement ?', ok: 'Valider', parameters: [
     [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
-
+    [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
     
     
     ])
@@ -39,37 +39,19 @@ node('master'){
                     def user = err.getCauses()[0].getUser()
                     if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
                         job2= 'release'     // Set default job to 'release'
+                        env2='qualif'
                     } else {
                         didInput = false
                         job2='release'
+                        env2='qualif'
                         echo "Aborted by: [${user}]"
                     }
                 }            
                 
  
-      try{          
-    def userInput2 = input(id: 'choix2', message: 'Environnement ?', parameters: [
-    [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
-    
-    
-    ])
-    
                 
-    }catch (err) {
-                    def user2 = err.getCauses()[0].getUser()
-                    if ('SYSTEM' == user2.toString()) { // SYSTEM means timeout
-                        env2= 'qualif'     // Set default Environment to 'qualif'
-                    } else {
-                        didInput = false
-                        env2='qualif'
-                        echo "Aborted by: [${user}]"
-                    }
-                } 
- 
- 
-                
-    job = userInput 
-    env = userInput2
+    job = userInput[input1]
+    env = userInput[input2]
     echo job
     echo env               
                 
