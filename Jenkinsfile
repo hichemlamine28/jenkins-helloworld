@@ -2,7 +2,7 @@
 def projet_settings = null
 def TARGET_ENV = 'dev'
 def MCS_CONTAINER_IMAGE_FULLNAME = null
-env2=''
+env2=null
 
 println "BRANCH : " + env.BRANCH_NAME
 
@@ -77,10 +77,10 @@ node {
 
 def getEnvName() {
 
-if (env2==''){return env2}
+if (env2=='qualif'){return env2}
 else{
     if(env == "") {
-        return ""
+        return "qualif"
     } else if (env == "Qualif") {
         return "qualif"
     } else if (env =="Prod") {
