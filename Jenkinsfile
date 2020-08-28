@@ -30,12 +30,13 @@ node('master'){
     def userInput = input(id: 'choix', message: 'some message', parameters: [
     [$class: 'ChoiceParameterDefinition', choices: '\nDev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
     ])
-    variable = userInput     
+    env = userInput     
                 }
             
   }
  
-        echo "Environnement : ${variable}"   // cette variable permet de choisir sur quel serveur on va deployer 
+        echo "Environnement : ${env}"          // cette variable permet de choisir sur quel serveur on va deployer 
+        echo "Remember Environnement : ${getEnvName()}" // cette variable permet de choisir sur quel serveur on va deployer 
        
    }
    
@@ -44,15 +45,35 @@ node('master'){
 node {
     stage('clone') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-        echo "Environnement clone: ${variable}"  
+        echo "Environnement clone: ${getEnvName()}"  
     }
     stage('build') {
     sh label: '', script: 'javac Main.java'
-        echo "Environnement build : ${variable}"  
+        echo "Environnement build : ${getEnvName()}"  
     }
     stage('run') {
     sh label: '', script: 'java Main'
-        echo "Environnement run: ${variable}"  
+        echo "Environnement run: ${getEnvName()}"  
+    }
+}
+
+
+
+def getEnvName() {
+    if(env == "") {
+        return ""
+    } else if (env == "Qualif") {
+        return "qualif"
+    } else if (env =="Prod") {
+        return "prod"
+    } else if (env =="Dev" ) {
+        return "dev"
+    } else if (env =="Preprod" ) {
+        return "preprod"
+    }else if (env =="Uat" ) {
+        return "uat"
+    }else {
+        return "unknown"
     }
 }
 
