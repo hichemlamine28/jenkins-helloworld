@@ -27,16 +27,33 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
            
      try{          
-    def userInput = input(id: 'choix', message: 'some message', parameters: [
+    def userInput1 = input(id: 'choix', message: 'JOB ?', parameters: [
     [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
+
+    
+    
+    ])
+     
+                
+    }catch (err) {
+                    def user = err.getCauses()[0].getUser()
+                    if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
+                        job2= 'release'     // Set default Environment to 'dev'
+                    } else {
+                        didInput = false
+                        job2='release'
+                        echo "Aborted by: [${user}]"
+                    }
+                }            
+                
+ 
+      try{          
+    def userInput2 = input(id: 'choix', message: 'Environnement ?', parameters: [
     [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
     
     
     ])
-    job = userInput[input1] 
-    env = userInput[input2]
-    echo job
-    echo env     
+    
                 
     }catch (err) {
                     def user = err.getCauses()[0].getUser()
@@ -47,10 +64,14 @@ node('master'){
                         env2='qualif'
                         echo "Aborted by: [${user}]"
                     }
-                }            
+                } 
+ 
+ 
                 
-                
-                
+    job = userInput1 
+    env = userInput2
+    echo job
+    echo env               
                 
                 
                 } 
