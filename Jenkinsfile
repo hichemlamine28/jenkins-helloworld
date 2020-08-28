@@ -27,7 +27,7 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
            
      try{          
-    def userInput = input(id: 'choix', message: 'JOB / Environnement ?', ok: 'Valider', parameters: [
+    def userInput = input(id: 'userInput', message: 'JOB / Environnement ?', ok: 'Valider', parameters: [
     [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
     [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
     
