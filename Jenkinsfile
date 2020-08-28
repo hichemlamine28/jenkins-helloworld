@@ -28,8 +28,8 @@ node('master'){
            
      try{          
     def userInput = input(id: 'userInput', message: 'JOB / Environnement ?', ok: 'Valider', parameters: [
-    [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
-    [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
+    [$class: 'ChoiceParameterDefinition', description: 'JOB ?', name:'input1', choices: '\nTag\nRelease'],
+    [$class: 'ChoiceParameterDefinition', description: 'Environnement ?', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd']
     
     
     ])
@@ -50,7 +50,7 @@ node('master'){
                 
  
                 
-    job = userInput
+    job = userInput['input1']
     env = userInput['input2']
     echo job
     echo env               
