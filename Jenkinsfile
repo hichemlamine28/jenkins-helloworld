@@ -39,6 +39,7 @@ node('master'){
                         env2= 'qualif'     // Set default Environment to 'dev'
                     } else {
                         didInput = false
+                        //env2='qualif'
                         echo "Aborted by: [${user}]"
                     }
                 }            
@@ -92,7 +93,7 @@ else{
     }else if (env =="Uat" ) {
         return "uat"
     }else {
-        return "unknown"
+        return "no env selected"
     }
   }    
     
