@@ -50,8 +50,8 @@ node('master'){
                 
  
                 
-    job = userInput[input1]
-    env = userInput[input2]
+    job = userInput['input1']
+    env = userInput['input2']
     echo job
     echo env               
                 
