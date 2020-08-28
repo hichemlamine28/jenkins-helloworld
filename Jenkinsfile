@@ -1,5 +1,6 @@
 // donner le choix à l'utilisateur, Builder ou Monter de version
-
+def projet_settings = null
+def TARGET_ENV = 'dev'
 def MCS_CONTAINER_IMAGE_FULLNAME = null
 env2=null
 
@@ -27,7 +28,7 @@ node('master'){
            
      try{          
     def userInput = input(id: 'choix', message: 'some message', parameters: [
-    [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: 'n\Tag\nRelease'],
+    [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
     [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
     
         [$class: 'ChoiceParameterDefinition', choices: string, description: 'description1', name:'input1'],
