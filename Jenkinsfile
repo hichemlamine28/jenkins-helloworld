@@ -27,7 +27,7 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
            
      try{          
-    def userInput1 = input(id: 'choix1', message: 'JOB ?', parameters: [
+    def userInput = input(id: 'choix1', message: 'JOB ?', parameters: [
     [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
 
     
@@ -57,7 +57,7 @@ node('master'){
                 
     }catch (err) {
                     def user2 = err.getCauses()[0].getUser()
-                    if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
+                    if ('SYSTEM' == user2.toString()) { // SYSTEM means timeout
                         env2= 'qualif'     // Set default Environment to 'qualif'
                     } else {
                         didInput = false
@@ -68,7 +68,7 @@ node('master'){
  
  
                 
-    job = userInput1 
+    job = userInput 
     env = userInput2
     echo job
     echo env               
