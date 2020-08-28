@@ -1,6 +1,5 @@
 // donner le choix à l'utilisateur, Builder ou Monter de version
-def projet_settings = null
-def TARGET_ENV = 'dev'
+
 def MCS_CONTAINER_IMAGE_FULLNAME = null
 env2=null
 
