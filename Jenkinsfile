@@ -25,13 +25,23 @@ node('master'){
    
  
                timeout(time: 30, unit: 'SECONDS') {
-               
-               
+           
      try{          
     def userInput = input(id: 'choix', message: 'some message', parameters: [
-    [$class: 'ChoiceParameterDefinition', choices: '\nDev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
+    [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: 'n\Tag\nRelease'],
+    [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
+    
+        [$class: 'ChoiceParameterDefinition', choices: string, description: 'description1', name:'input1'],
+   
+    
+    
+    
+    
     ])
-    env = userInput     
+    job = userInput[input1] 
+    env = userInput[input2]
+    echo job
+    echo env     
                 
     }catch (err) {
                     def user = err.getCauses()[0].getUser()
@@ -39,7 +49,7 @@ node('master'){
                         env2= 'qualif'     // Set default Environment to 'dev'
                     } else {
                         didInput = false
-                        //env2='qualif'
+                        env2='qualif'
                         echo "Aborted by: [${user}]"
                     }
                 }            
@@ -48,7 +58,7 @@ node('master'){
                 
                 
                 
-                }
+                } 
             
   }
  
