@@ -26,11 +26,26 @@ node('master'){
                timeout(time: 30, unit: 'SECONDS') {
                
                
-               
+     try{          
     def userInput = input(id: 'choix', message: 'some message', parameters: [
     [$class: 'ChoiceParameterDefinition', choices: '\nDev\nQualif\nPreprod\nProd', description: 'description', name:'input'],
     ])
     env = userInput     
+                
+    }catch (err) {
+                    def user = err.getCauses()[0].getUser()
+                    if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
+                        env= 'qualif'     // Set default Environment to 'dev'
+                    } else {
+                        didInput = false
+                        echo "Aborted by: [${user}]"
+                    }
+                }            
+                
+                
+                
+                
+                
                 }
             
   }
