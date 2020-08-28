@@ -31,11 +31,6 @@ node('master'){
     [$class: 'ChoiceParameterDefinition', description: 'description1', name:'input1', choices: '\nTag\nRelease'],
     [$class: 'ChoiceParameterDefinition', description: 'description2', name:'input2', choices: '\nDev\nQualif\nPreprod\nProd'],
     
-        [$class: 'ChoiceParameterDefinition', choices: string, description: 'description1', name:'input1'],
-   
-    
-    
-    
     
     ])
     job = userInput[input1] 
