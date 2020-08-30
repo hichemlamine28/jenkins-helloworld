@@ -93,7 +93,7 @@ node('master'){
 
 
 
-node('node2') {
+node {
 
 
        server=getEnvName()
