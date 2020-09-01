@@ -2,7 +2,7 @@
 def projet_settings = null
 def TARGET_ENV = 'dev'
 def MCS_CONTAINER_IMAGE_FULLNAME = null
-env2=null
+
 
 println "BRANCH : " + env.BRANCH_NAME
 
@@ -39,10 +39,10 @@ node('master'){
     }catch (err) {
                     def user = err.getCauses()[0].getUser()
                     if ('SYSTEM' == user.toString()) { // SYSTEM means timeout
-                        env2= 'qualif'     // Set default Environment to 'dev'
+                        env= 'Qualif'     // Set default Environment to 'dev'
                     } else {
                         didInput = false
-                        env2='qualif'
+                        env='Qualif'
                         echo "Aborted by: [${user}]"
                     }
                 }            
@@ -144,9 +144,8 @@ node {
 
 def getEnvName() {
 
-if (env2=='qualif'){return env2}
-else{
-    if(env == "") {
+
+    if(env == null) {
         return "qualif"
     } else if (env == "Qualif") {
         return "qualif"
@@ -161,7 +160,7 @@ else{
     }else {
         return "no env selected"
     }
-  }    
+      
     
     
 }
