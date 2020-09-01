@@ -83,20 +83,9 @@ node('master'){
        //varibale pour idprojet       linkinnov-env-test --------- linkinnov-221611
        //variable pour cluster        linkinnov-qualif-app--------linkinnov-prod-app 
        //variable pour jsonfile       .............98c45.json -------         ....573.json
-
-      
-   }
-
        
-   }
-   
-
-
-
-node {
-
-
-       server=getEnvName()
+       
+              server=getEnvName()
 
        if(server=="qualif"){
        idproject="linkinnov-env-test"
@@ -119,7 +108,20 @@ node {
    echo "server    =   ${server}"
    echo "idproject =   ${idproject}"
    echo "cluster   =   ${cluster}"
-   echo "jsonfile  =   ${jsonfile}"      
+   echo "jsonfile  =   ${jsonfile}"  
+
+      
+   }
+
+       
+   }
+   
+
+
+
+node {
+
+    
        
      
 
