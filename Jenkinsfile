@@ -52,7 +52,6 @@ node('master'){
                 } 
   
         echo "Environnement : ${env}"          // cette variable permet de choisir sur quel serveur on va deployer 
-        echo "Remember Environnement : ${getEnvName()}" // cette variable permet de choisir sur quel serveur on va deployer 
         
         //GCP_PROJECT_ID="linkinnov-env-test"
         //GOOGLE_CLOUD_PROJECT_ID="linkinnov-env-test"
@@ -125,29 +124,29 @@ node {
     if (server=='qualif'){
      stage('clone-qualif') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-        echo "Environnement clone: ${getEnvName()}"  
+        echo "Environnement clone: ${server}"  
     }
     stage('build-qualif') {
     sh label: '', script: 'javac Main.java'
-        echo "Environnement build : ${getEnvName()}"  
+        echo "Environnement build : ${server}"  
     }
     stage('run-qualif') {
     sh label: '', script: 'java Main'
-        echo "Environnement run: ${getEnvName()}"  
+        echo "Environnement run: ${server}"  
     }
     }else if (server =='prod'){
     
       stage('clone-prod') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-        echo "Environnement clone: ${getEnvName()}"  
+        echo "Environnement clone: ${server}"  
     }
     stage('build-prod') {
     sh label: '', script: 'javac Main.java'
-        echo "Environnement build : ${getEnvName()}"  
+        echo "Environnement build : ${server}"  
     }
     stage('runp-rod') {
     sh label: '', script: 'java Main'
-        echo "Environnement run: ${getEnvName()}"  
+        echo "Environnement run: ${server}"  
     }   
     
     
