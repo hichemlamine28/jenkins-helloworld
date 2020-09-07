@@ -5,8 +5,6 @@ def MCS_CONTAINER_IMAGE_FULLNAME = null
 def env='Qualif'
 
 
-println "BRANCH : " + env.BRANCH_NAME
-
     properties(
         [
             buildDiscarder(
