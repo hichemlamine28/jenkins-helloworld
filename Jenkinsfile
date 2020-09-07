@@ -157,15 +157,15 @@ node {
 def getEnvName() {
 
 
-    if(env == null) {
+    if(${env} == null) {
         return "qualif"
-    } else if (env == "Qualif") {
+    } else if (${env} == "Qualif") {
         return "qualif"
-    } else if (env =="Prod") {
+    } else if (${env} =="Prod") {
         return "prod"
-    } else if (env =="Dev" ) {
+    } else if (${env} =="Dev" ) {
         return "dev"
-    } else if (env =="Preprod" ) {
+    } else if (${env} =="Preprod" ) {
         return "preprod"
     }else {
         return "no env selected"
