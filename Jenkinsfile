@@ -85,12 +85,12 @@ node('master'){
        
        server=getEnvName()
 
-       if(server=="qualif"){
+       if(env=="Qualif"){
        idproject="linkinnov-env-test"
        cluster="linkinnov-qualif-app"
        jsonfile='file-linkinnov-env-test-a00032f98c45.json'
        } 
-       else if(server=='prod'){
+       else if(env=='Prod'){
        idproject="linkinnov-221611"
        cluster="linkinnov-prod-app"
        jsonfile='file-linkinnov-221611-1b9d82fcb573.json'       
