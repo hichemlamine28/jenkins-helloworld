@@ -156,10 +156,7 @@ node {
 
 def getEnvName() {
 
-
-    if(env == '') {
-        return 'qualif'
-    } else if (env == 'Qualif') {
+ if (env == 'Qualif') {
         return 'qualif'
     } else if (env =='Prod') {
         return 'prod'
