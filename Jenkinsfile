@@ -83,19 +83,22 @@ node('master'){
        //variable pour jsonfile       .............98c45.json -------         ....573.json
        
        
-       server=getEnvName()
+       
 
        if(env=="Qualif"){
+       server='qualif'
        idproject="linkinnov-env-test"
        cluster="linkinnov-qualif-app"
        jsonfile='file-linkinnov-env-test-a00032f98c45.json'
        } 
        else if(env=='Prod'){
+       server='prod'
        idproject="linkinnov-221611"
        cluster="linkinnov-prod-app"
        jsonfile='file-linkinnov-221611-1b9d82fcb573.json'       
        } 
        else{
+       server='qualif'
        idproject="linkinnov-env-test"
        cluster="linkinnov-qualif-app"
        jsonfile='file-linkinnov-env-test-a00032f98c45.json'       
@@ -119,7 +122,7 @@ node('master'){
 
 node {
 
-    if (getEnvName()=='qualif'){
+    if (server=='qualif'){
      stage('clone-qualif') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
         echo "Environnement clone: ${getEnvName()}"  
@@ -132,7 +135,7 @@ node {
     sh label: '', script: 'java Main'
         echo "Environnement run: ${getEnvName()}"  
     }
-    }else if (getEnvName() =='prod'){
+    }else if (server =='prod'){
     
       stage('clone-prod') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
