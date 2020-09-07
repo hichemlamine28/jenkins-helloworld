@@ -2,6 +2,7 @@
 def projet_settings = null
 def TARGET_ENV = 'dev'
 def MCS_CONTAINER_IMAGE_FULLNAME = null
+def env='Qualif'
 
 
 println "BRANCH : " + env.BRANCH_NAME
@@ -42,7 +43,6 @@ node('master'){
                         env= 'Qualif'     // Set default Environment to 'dev'
                     } else {
                         didInput = false
-                        env='Qualif'
                         echo "Aborted by: [${user}]"
                     }
                 }            
@@ -85,7 +85,7 @@ node('master'){
        //variable pour jsonfile       .............98c45.json -------         ....573.json
        
        
-              server=getEnvName()
+       server=getEnvName()
 
        if(server=="qualif"){
        idproject="linkinnov-env-test"
@@ -121,25 +121,37 @@ node('master'){
 
 node {
 
-    
-       
-     
-
-
-
-
-    stage('clone') {
+    if (getEnvName()=='qualif'){
+     stage('clone-qualif') {
     git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
         echo "Environnement clone: ${getEnvName()}"  
     }
-    stage('build') {
+    stage('build-qualif') {
     sh label: '', script: 'javac Main.java'
         echo "Environnement build : ${getEnvName()}"  
     }
-    stage('run') {
+    stage('run-qualif') {
     sh label: '', script: 'java Main'
         echo "Environnement run: ${getEnvName()}"  
     }
+    }else if (getEnvName() =='prod'){
+    
+      stage('clone-prod') {
+    git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
+        echo "Environnement clone: ${getEnvName()}"  
+    }
+    stage('build-prod') {
+    sh label: '', script: 'javac Main.java'
+        echo "Environnement build : ${getEnvName()}"  
+    }
+    stage('runp-rod') {
+    sh label: '', script: 'java Main'
+        echo "Environnement run: ${getEnvName()}"  
+    }   
+    
+    
+    }
+        
 }
 
 
@@ -157,13 +169,9 @@ def getEnvName() {
         return "dev"
     } else if (env =="Preprod" ) {
         return "preprod"
-    }else if (env =="Uat" ) {
-        return "uat"
     }else {
         return "no env selected"
     }
-      
-    
-    
+          
 }
 
