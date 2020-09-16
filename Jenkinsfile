@@ -123,7 +123,8 @@ node {
 
     if (server=='qualif'){
      stage('clone-qualif') {
-    git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
+    //git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
+    checkout scm
         echo "Environnement clone: ${server}"  
     }
     stage('build-qualif') {
@@ -137,7 +138,8 @@ node {
     }else if (server =='prod'){
     
       stage('clone-prod') {
-    git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
+    //git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
+    checkout scm
         echo "Environnement clone: ${server}"  
     }
     stage('build-prod') {
