@@ -23,7 +23,7 @@ parameters {
             defaultValue: '', 
             description: 'tag name', 
             type: 'PT_SINGLE_SELECT', 
-            groovyScript: """def gettags = ("git ls-remote -t https://github.com/tomerb3/supremedevops.git").execute()
+            groovyScript: """def gettags = ("git ls-remote -t https://github.com/hichemlamine28/jenkins-helloworld.git").execute()
                return gettags.text.readLines().collect { it.split()[1].replaceAll('refs/tags/', '').replaceAll("\\\\^\\\\{\\\\}", '')}
                           """,)
     }
