@@ -16,7 +16,17 @@ def env='Qualif'
         ]
     )
 
+parameters {
 
+        extendedChoice( 
+            name: 'TagName', 
+            defaultValue: '', 
+            description: 'tag name', 
+            type: 'PT_SINGLE_SELECT', 
+            groovyScript: """def gettags = ("git ls-remote -t https://github.com/tomerb3/supremedevops.git").execute()
+               return gettags.text.readLines().collect { it.split()[1].replaceAll('refs/tags/', '').replaceAll("\\\\^\\\\{\\\\}", '')}
+                          """,)
+    }
 
 node('master'){
 
