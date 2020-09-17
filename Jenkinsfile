@@ -134,7 +134,9 @@ node {
     if (server=='qualif'){
      stage('clone-qualif') {
     //git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-    checkout scm
+    //checkout scm
+         ("git ls-remote -t https://github.com/hichemlamine28/jenkins-helloworld.git").execute()
+               return gettags.text.readLines().collect { it.split()[1].replaceAll('refs/tags/', '').replaceAll("\\\\^\\\\{\\\\}", '')}
         echo "Environnement clone: ${server}"  
     }
     stage('build-qualif') {
@@ -149,7 +151,9 @@ node {
     
       stage('clone-prod') {
     //git 'https://github.com/hichemlamine28/jenkins-helloworld.git'
-    checkout scm
+    //checkout scm
+          ("git ls-remote -t https://github.com/hichemlamine28/jenkins-helloworld.git").execute()
+               return gettags.text.readLines().collect { it.split()[1].replaceAll('refs/tags/', '').replaceAll("\\\\^\\\\{\\\\}", '')}
         echo "Environnement clone: ${server}"  
     }
     stage('build-prod') {
